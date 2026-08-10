@@ -12,7 +12,7 @@ export const site = {
   title: "Jan Bartošek — Poslanec za Jihočeský kraj",
   description:
     "Osobní web poslance Ing. Jana Bartoška, MPA. Bezpečnostní politika, Jihočeský kraj, křesťanská demokracie.",
-  url: "https://janbartosek.cz",
+  url: "https://www.janbartosek.cz",
   locale: "cs_CZ",
   ogImage: "/images/og-image.svg",
 
