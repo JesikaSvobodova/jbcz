@@ -1,0 +1,193 @@
+# Fotogalerie Jana Bartoška — metadata
+# Každý záznam popisuje obsah, kvalitu a vhodné použití fotky
+
+images:
+  # ── PROFESIONÁLNÍ PORTRÉTY (studiové) ──────────────────────────
+
+  - original: IMG_1487.jpg
+    renamed: portret-formalni.jpg
+    description: >
+      Profesionální studiový portrét na čistě bílém pozadí. Jan Bartošek
+      v tmavém obleku, bílá košile, modrá vzorovaná kravata, brýle s kovovými
+      obroučkami, odznak české vlajky na klopě. Mírný sebevědomý úsměv,
+      pohled přímo do kamery. Polopostava, mírně natočen doleva.
+    dimensions: 3747x5621
+    size_kb: 9051
+    quality: vysoká (studiová, profesionální osvětlení, ostrá)
+    mood: formální, důvěryhodný, seriózní
+    usage:
+      - about-page-portrait
+      - og-image-photo
+    processing: resize 800x1200, crop na poprsí, komprese webp q80
+
+  - original: IMG_1609.jpg
+    renamed: portret-gesto.jpg
+    description: >
+      Profesionální studiový portrét na bílém pozadí. Stejné oblečení jako
+      portret-formalni. Dynamičtější póza — natahuje pravou ruku směrem
+      k divákovi (gesto podání ruky / vítání). Otevřený úsměv, přívětivý
+      výraz. Celá horní polovina těla viditelná.
+    dimensions: 3657x5485
+    size_kb: 8936
+    quality: vysoká (studiová, profesionální)
+    mood: přívětivý, otevřený, přístupný
+    usage:
+      - hero-photo
+    processing: resize, crop od pasu nahoru, komprese webp q80
+
+  # ── FOTKY Z AKCÍ A SETKÁNÍ ─────────────────────────────────────
+
+  - original: 545233809_1185687296699070_7645670937342533343_n.jpg
+    renamed: s-prezidentem-pavlem.jpg
+    description: >
+      Jan Bartošek s prezidentem Petrem Pavlem v reprezentativním interiéru
+      (Pražský hrad — galerie s historickými malbami, červený koberec).
+      Pavel drží malou bílou krabičku (Dačické kostky cukru — regionální
+      specialita). Oba v oblecích, usmívají se. Watermark SPOLU.
+    dimensions: 1290x1600
+    size_kb: 194
+    quality: dobrá (mobilní fotka, dostatečné osvětlení)
+    mood: reprezentativní, důvěryhodný
+    usage:
+      - about-page-gallery
+      - blog-bezpecnost
+    processing: crop na 4:3, komprese webp q75
+
+  - original: 539428722_1175928524341614_7074212298694665041_n.jpg
+    renamed: s-vystrclem-akce.jpg
+    description: >
+      Jan Bartošek (vpravo) s Milošem Vystrčilem (předseda Senátu, vlevo)
+      pod modrým party stanem na venkovní akci. Oba v oblecích, usmívají se.
+      V pozadí historická budova, sedící lidé. Watermark SPOLU dole.
+    dimensions: 1440x1920
+    size_kb: 215
+    quality: dobrá (denní světlo, mobilní)
+    mood: přátelský, politická spolupráce
+    usage:
+      - about-page-gallery
+    processing: crop na poprsí obou, komprese webp q75
+
+  - original: 579480770_1236742204926912_2260602881075692110_n.jpg
+    renamed: vojenska-prehlidka.jpg
+    description: >
+      Jan Bartošek na prezentaci armádní techniky. Podává ruku, drží bílou
+      krabici (dar). V pozadí gotický kostel (katedrála sv. Bartoloměje,
+      Plzeň), obrněné vozidlo, vojáci v plné výstroji. Podzimní atmosféra.
+    dimensions: 1536x2048
+    size_kb: 565
+    quality: dobrá (mobilní, podzimní světlo)
+    mood: patriotický, bezpečnostní, silný
+    usage:
+      - topic-card-bezpecnost
+      - blog-bezpecnost
+    processing: crop na šířku 16:9 se zachováním vojenské techniky, komprese webp q75
+
+  - original: 641442566_1314292270505238_619672760557382313_n.jpg
+    renamed: navsteva-buca-ukrajina.jpg
+    description: >
+      Jan Bartošek u památníku "I LOVE BUCHA" v Buče na Ukrajině. Tmavý
+      oblek, červená kravata. Vážný výraz. V pozadí borovicový les, dlážděný
+      chodník. Vzpomínkové/memoriální místo válečného zločinu.
+    dimensions: 872x1600
+    size_kb: 368
+    quality: dobrá (mobilní, zataženo)
+    mood: vážný, odhodlaný, proukrajinský
+    usage:
+      - blog-bezpecnost
+    processing: crop na šířku, komprese webp q75
+
+  - original: 558154696_1207499057851227_848456195299335846_n.jpg
+    renamed: shromazdeni-izrael-praha.jpg
+    description: >
+      Jan Bartošek selfie na Staroměstském náměstí v Praze, večerní
+      shromáždění na podporu Izraele. Izraelské vlajky v pozadí, modré
+      pódium, svíčka v ruce. Modrá hodina, atmosférické večerní osvětlení.
+    dimensions: 1080x1440
+    size_kb: 192
+    quality: střední (selfie, šum, nízké světlo)
+    mood: angažovaný, solidární
+    usage:
+      - blog
+    processing: crop na čtverec, komprese webp q70
+
+  - original: 560556353_1208631197738013_7521850310898007994_n.jpg
+    renamed: pietni-akt-snemovna.jpg
+    description: >
+      Jan Bartošek (vlevo, tmavý oblek) na pietním aktu. Žena v černém
+      pokládá věnec s trikolorou u pamětní desky a sochy. Nádvoří historické
+      budovy (arkády). Další účastníci v pozadí, deštníky — dešťové počasí.
+    dimensions: 1200x1600
+    size_kb: 346
+    quality: dobrá (venkovní, zataženo)
+    mood: důstojný, pietní, státnický
+    usage:
+      - about-page-gallery
+    processing: crop na šířku 3:2, komprese webp q75
+
+  - original: 540701160_1177362864198180_506849004410767911_n.jpg
+    renamed: hasicska-soutez-region.jpg
+    description: >
+      Jan Bartošek s mikrofonem na venkovní regionální akci (hasičská soutěž).
+      Vedle civilista a hasič ve slavnostní uniformě. V pozadí stromy, stan,
+      lidé na lavicích. Watermark SPOLU.
+    dimensions: 1607x1920
+    size_kb: 2740
+    quality: dobrá ale velký soubor (venkovní, denní světlo)
+    mood: přátelský, regionální, komunitní
+    usage:
+      - topic-card-region
+      - blog-jihocesky-kraj
+    processing: resize (soubor zbytečně velký), crop na šířku, komprese webp q75
+
+  - original: 618387790_1288447289756403_6145657178478475369_n.jpg
+    renamed: s-diplomatem-dacice.jpg
+    description: >
+      Jan Bartošek s asijským diplomatem (pravděpodobně japonský velvyslanec)
+      u kamenného památníku s datem 1843 a kostkou cukru na vrcholu — symbol
+      Dačic (místo vynálezu kostkového cukru). Zimní období, holé stromy.
+    dimensions: 1200x1600
+    size_kb: 366
+    quality: dobrá (venkovní, zimní světlo)
+    mood: diplomatický, regionální hrdost
+    usage:
+      - blog-jihocesky-kraj
+    processing: crop na 4:3, komprese webp q75
+
+  # ── LOGA A GRAFIKA ─────────────────────────────────────────────
+
+  - original: 595766220_1254019546532511_3995436272875832588_n.png
+    renamed: facebook-cover-banner.png
+    description: >
+      Facebook cover photo / banner. Levá polovina: fotka z jednání Poslanecké
+      sněmovny (skupina poslanců, EU vlajka). Pravá polovina: žlutý panel
+      s logem "Světlo tma nepohltí" a textem "Klidnou silou proti chaosu —
+      Jan Bartošek, jihočeský poslanec".
+    dimensions: 851x315
+    quality: středně nízká (Facebook komprese)
+    mood: profesionální, politický
+    usage:
+      - reference-only
+
+  - original: KDU-CSL_Logo_2012.svg
+    renamed: logo-kdu-csl.svg
+    description: >
+      Oficiální SVG logo KDU-ČSL (verze 2012). Stylizovaný motiv s textem
+      "KDU-ČSL". Jednobarevné — tmavě modrá (#2F448E). Vektorové.
+    dimensions: 436x248 (vektorové)
+    quality: vektorová
+    mood: stranický, oficiální
+    usage:
+      - footer-party-logo
+
+  - original: majak_horizontalni_barevne.png
+    renamed: logo-svetlo-tma-nepohlti.png
+    description: >
+      Horizontální logo iniciativy "Světlo tma nepohltí". Vlevo štít
+      s majákem vysílajícím žlutý paprsek, vpravo text v tmavě modré.
+      Průhledné pozadí (alpha channel).
+    dimensions: 1959x915
+    quality: vysoká (čistá grafika)
+    mood: hodnotový, ideologický
+    usage:
+      - footer nebo about-page
+    processing: resize na vhodnou velikost pro web

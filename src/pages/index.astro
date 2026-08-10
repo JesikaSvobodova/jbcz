@@ -1,0 +1,164 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-brand-dark via-brand-dark to-brand">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+    <div class="container-wide relative py-16 md:py-24">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <div class="text-center md:text-left">
+          <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-blue-200 backdrop-blur-sm">
+            <img src="/images/logo-kdu-csl.svg" alt="" class="h-4 w-auto brightness-0 invert" />
+            KDU-ČSL / SPOLU
+          </p>
+          <h1 class="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+            Jan Bartošek
+          </h1>
+          <p class="mb-2 text-xl font-medium text-blue-200 md:text-2xl">
+            Poslanec za Jihočeský kraj
+          </p>
+          <p class="mb-8 max-w-lg text-base leading-relaxed text-blue-200/80 md:text-lg">
+            Z terapeuta závislostí poslancem. Pracuji pro bezpečnost Česka a lepší život v regionech.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4 md:justify-start">
+            <a href="https://www.facebook.com/bartosekKDU" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+            <a href="https://twitter.com/honzabartosek" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X (Twitter)
+            </a>
+            <a href="https://www.instagram.com/bartosek_jan" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+        <div class="flex justify-center md:justify-end">
+          <div class="relative w-72 sm:w-80 lg:w-96">
+            <img
+              src="/images/hero-bartosek.jpg"
+              alt="Jan Bartošek"
+              class="w-full h-auto rounded-2xl shadow-2xl"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KDO JSEM -->
+  <section class="py-16 md:py-24">
+    <div class="container-narrow">
+      <div class="mb-8 text-center">
+        <div class="mx-auto mb-4 h-1 w-16 rounded-full" style="background: var(--color-brand-light);"></div>
+        <h2 class="text-3xl md:text-4xl">Kdo jsem</h2>
+      </div>
+      <div class="space-y-4 text-lg leading-relaxed text-text-muted">
+        <p>
+          Jsem <strong class="text-brand-dark">Ing. Jan Bartošek, MPA</strong>, poslanec Poslanecké sněmovny Parlamentu České republiky za Jihočeský kraj. Jsem členem KDU-ČSL a koalice SPOLU.
+        </p>
+        <p>
+          Než jsem vstoupil do politiky, pomáhal jsem lidem na cestě ze závislosti zpět do života. Roky práce v Terapeutické komunitě Podcestný Mlýn u Dačic mě naučily, že každý člověk si zaslouží šanci.
+        </p>
+        <p>
+          Poslancem jsem od roku 2013. V minulosti jsem zastával funkci místopředsedy Poslanecké sněmovny. Nyní působím ve Výboru pro bezpečnost, Stálé komisi pro kontrolu činnosti BIS a Vojenského zpravodajství. Bezpečnost Česka je mou prioritou.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTOGALERIE -->
+  <section class="bg-surface-muted py-16 md:py-24">
+    <div class="container-wide">
+      <div class="mb-10 text-center">
+        <div class="mx-auto mb-4 h-1 w-16 rounded-full" style="background: var(--color-brand-light);"></div>
+        <h2 class="text-3xl md:text-4xl">Fotogalerie</h2>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+          <img src="/images/hero-bartosek.jpg" alt="Jan Bartošek — portrét" class="w-full h-auto" loading="lazy" />
+        </div>
+        <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+          <img src="/images/about-bartosek.webp" alt="Jan Bartošek" class="w-full h-auto" loading="lazy" />
+        </div>
+        <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+          <img src="/images/about-bartosek.jpg" alt="Jan Bartošek" class="w-full h-auto" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKTY -->
+  <section class="py-16 md:py-24">
+    <div class="container-wide">
+      <div class="mb-10 text-center">
+        <div class="mx-auto mb-4 h-1 w-16 rounded-full" style="background: var(--color-brand-light);"></div>
+        <h2 class="text-3xl md:text-4xl">Kontakt</h2>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+        <!-- Jan Bartošek -->
+        <div class="rounded-2xl border border-surface-border bg-white p-8 shadow-sm">
+          <h3 class="mb-1 text-xl font-bold text-brand-dark">Ing. Jan Bartošek, MPA</h3>
+          <p class="mb-4 text-sm text-text-muted">Poslanec PSP ČR za Jihočeský kraj</p>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="mailto:bartosekj@psp.cz" class="text-brand hover:underline">bartosekj@psp.cz</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Poslanecká kancelář Praha -->
+        <div class="rounded-2xl border border-surface-border bg-white p-8 shadow-sm">
+          <h3 class="mb-1 text-xl font-bold text-brand-dark">Kancelář v Praze</h3>
+          <p class="mb-4 text-sm text-text-muted">Poslanecká sněmovna Parlamentu ČR</p>
+          <address class="mb-4 text-sm not-italic text-text-muted">
+            Sněmovní 4/176<br />
+            118 00 Praha — Malá Strana
+          </address>
+          <div class="border-t border-surface-border pt-4">
+            <p class="mb-1 text-sm font-semibold text-brand-dark">Simon Dytrych — asistent</p>
+            <ul class="space-y-1 text-sm">
+              <li><a href="tel:+420776666475" class="text-brand hover:underline">+420 776 666 475</a></li>
+              <li><a href="mailto:dytrych@kdu.cz" class="text-brand hover:underline">dytrych@kdu.cz</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Regionální kancelář -->
+        <div class="rounded-2xl border border-surface-border bg-white p-8 shadow-sm">
+          <h3 class="mb-1 text-xl font-bold text-brand-dark">Regionální kancelář</h3>
+          <p class="mb-4 text-sm text-text-muted">České Budějovice</p>
+          <address class="mb-4 text-sm not-italic text-text-muted">
+            Lannova 13<br />
+            370 01 České Budějovice
+          </address>
+          <div class="border-t border-surface-border pt-4">
+            <p class="mb-1 text-sm font-semibold text-brand-dark">Jesika Kubičková</p>
+            <ul class="space-y-1 text-sm">
+              <li><a href="tel:+420725593178" class="text-brand hover:underline">+420 725 593 178</a></li>
+              <li><a href="mailto:kubickova@janbartosek.cz" class="text-brand hover:underline">kubickova@janbartosek.cz</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t bg-brand-dark py-10 text-center text-sm text-blue-200/70">
+    <div class="container-narrow">
+      <div class="mb-4 flex items-center justify-center gap-4">
+        <img src="/images/logo-kdu-csl.svg" alt="KDU-ČSL" class="h-8 w-auto brightness-0 invert" />
+        <img src="/images/logo-svetlo-tma-nepohlti.webp" alt="Světlo tma nepohltí" class="h-8 w-auto brightness-0 invert" />
+      </div>
+      <p>&copy; {new Date().getFullYear()} Jan Bartošek. Všechna práva vyhrazena.</p>
+    </div>
+  </footer>
+</BaseLayout>

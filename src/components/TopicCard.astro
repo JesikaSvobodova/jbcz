@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: "shield" | "leaf" | "lighthouse";
+  slogan?: string;
+  link: string;
+}
+
+const { title, description, icon, slogan, link } = Astro.props;
+const Tag = link ? "a" : "div";
+
+const icons = {
+  /* Důvěra — heraldický štít s klenbovým obloukem */
+  shield: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 2L3 6v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6L12 2z" /><path stroke-linecap="round" d="M8 10a4 4 0 0 1 8 0" /><line x1="12" y1="10" x2="12" y2="15" stroke-linecap="round" />`,
+  /* Člověk — lipový list (srdcovitý tvar + žilky) */
+  leaf: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 21C12 21 4 15 4 9.5C4 6.5 6 4 8.5 4C10 4 11.3 4.8 12 6C12.7 4.8 14 4 15.5 4C18 4 20 6.5 20 9.5C20 15 12 21 12 21Z" /><line x1="12" y1="6" x2="12" y2="18" stroke-linecap="round" /><path stroke-linecap="round" d="M12 10L9 13M12 13L15.5 10" />`,
+  /* Maják — maják s paprsky světla */
+  lighthouse: `<path stroke-linejoin="round" d="M10 22H14L15 14H9L10 22Z" /><rect x="9.5" y="10" width="5" height="4" rx="0.5" /><path stroke-linejoin="round" d="M10 10L12 8L14 10" /><line x1="7" y1="12" x2="3" y2="12" stroke-linecap="round" /><line x1="17" y1="12" x2="21" y2="12" stroke-linecap="round" /><line x1="7.5" y1="9" x2="4.5" y2="7" stroke-linecap="round" /><line x1="16.5" y1="9" x2="19.5" y2="7" stroke-linecap="round" />`,
+};
+---
+
+<Tag
+  href={link || undefined}
+  class="group flex flex-col rounded-2xl border border-surface-border bg-white p-6 transition-all hover:border-brand/30 hover:shadow-lg sm:p-8"
+>
+  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-lighter text-brand transition-colors group-hover:bg-brand group-hover:text-white">
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <Fragment set:html={icons[icon]} />
+    </svg>
+  </div>
+  <h3 class="mb-2 text-lg font-bold text-brand-dark">{title}</h3>
+  {slogan && (
+    <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-brand">{slogan}</p>
+  )}
+  <p class="text-sm leading-relaxed text-text-muted">{description}</p>
+</Tag>

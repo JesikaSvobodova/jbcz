@@ -1,0 +1,91 @@
+---
+import { site } from "@/data/site";
+---
+
+<section class="hero-section relative overflow-hidden bg-gradient-to-br from-brand-dark via-brand-dark to-brand">
+  <!-- Subtle pattern overlay -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+  </div>
+
+  <!-- Decorative glow -->
+  <div class="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-brand-light), transparent 70%);"></div>
+  <div class="absolute -left-20 bottom-0 h-64 w-64 rounded-full opacity-5" style="background: radial-gradient(circle, white, transparent 70%);"></div>
+
+  <div class="container-wide relative py-16 md:py-24 lg:py-32">
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <!-- Text -->
+      <div class="text-center md:text-left">
+        <div class="mb-3 flex flex-wrap items-center gap-2">
+          <p class="hero-accent inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider backdrop-blur-sm">
+            <img src="/images/logo-kdu-csl.svg" alt="" class="h-4 w-auto brightness-0 invert" />
+            {site.person.party} / {site.person.coalition}
+          </p>
+          <div class="rounded-xl bg-white p-1.5">
+            <img src="/images/logo-svetlo-tma-nepohlti.webp" alt="Světlo tma nepohltí" class="h-10 w-auto" />
+          </div>
+        </div>
+        <h1 class="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+          {site.person.shortName}
+        </h1>
+        <p class="hero-text mb-6 text-lg leading-relaxed md:text-xl">
+          {site.hero.headline}
+        </p>
+        <p class="hero-text-soft mb-8 max-w-lg text-base leading-relaxed md:text-lg">
+          {site.hero.subheadline}
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
+          <a href={site.hero.ctaLink} class="btn-primary bg-white !text-brand-dark hover:!bg-gray-50">
+            {site.hero.ctaText}
+          </a>
+          <a href={site.hero.secondaryCtaLink} class="hero-btn-outline btn-outline !border-current hover:!bg-white/10 hover:!text-white">
+            {site.hero.secondaryCtaText}
+          </a>
+        </div>
+      </div>
+
+      <!-- Photo -->
+      <div class="flex justify-center md:justify-end">
+        <div class="relative">
+          <div class="hero-photo-ring absolute -inset-2 rounded-2xl opacity-30"></div>
+          <div class="relative h-72 w-72 overflow-hidden rounded-2xl shadow-2xl sm:h-80 sm:w-80 lg:h-96 lg:w-96">
+            <picture>
+              <source srcset="/images/hero-bartosek.webp" type="image/webp" />
+              <img
+                src="/images/hero-bartosek.jpg"
+                alt="Jan Bartošek — portrét"
+                class="absolute w-full object-cover"
+                style="height: 130%; top: -15%;"
+                loading="eager"
+                width="800"
+                height="960"
+              />
+            </picture>
+          </div>
+          <div class="absolute -bottom-3 -right-3 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-brand-dark shadow-lg">
+            Poslanec od 2013
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-accent {
+    color: var(--theme-hero-accent);
+  }
+  .hero-text {
+    color: var(--theme-hero-accent);
+  }
+  .hero-text-soft {
+    color: var(--theme-hero-accent-soft);
+  }
+  .hero-btn-outline {
+    color: var(--theme-hero-accent);
+    border-color: var(--theme-hero-accent) !important;
+  }
+  .hero-photo-ring {
+    background: linear-gradient(135deg, var(--color-brand-light), transparent, var(--color-brand-light));
+  }
+</style>

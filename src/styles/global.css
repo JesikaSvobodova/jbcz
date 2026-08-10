@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME SYSTEM — 4 brandové identity
+   Defaultní: "duvera" (modrá)
+   Alternativy: "clovek" (zelená), "majak" (navy + zlatá), "facebook" (as-is FB brand)
+
+   Aktivace dev baru:
+   __devbar()
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  /* ── TÉMA 1: DŮVĚRA (default) ─────────────────────────────── */
+  /* Konzervativní modrá — důvěra, bezpečnost, stabilita.
+     Pro: oficiální komunikace, formální kontext. */
+  :root,
+  [data-theme="duvera"] {
+    --color-brand-dark: #1B3A5C;
+    --color-brand: #2E7AB8;
+    --color-brand-light: #4A90C4;
+    --color-brand-lighter: #E8F1F8;
+    --color-brand-accent: #3B82F6;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: #F7F8FA;
+    --color-surface-border: #E2E5EB;
+    --color-text: #1F2937;
+    --color-text-muted: #6B7280;
+    --color-text-inverted: #FFFFFF;
+    --theme-name: "Důvěra";
+    --theme-hero-accent: #93C5FD;
+    --theme-hero-accent-soft: rgba(147, 197, 253, 0.8);
+    --theme-footer-border: #1e40af;
+  }
+
+  /* ── TÉMA 2: ČLOVĚK ───────────────────────────────────────── */
+  /* Lesní zelená — lidskost, terapie, příroda, komunita.
+     Vychází z Bartošek-terapeut příběhu a jihočeské krajiny.
+     Pro: regionální kampaň, sociální témata, měkčí komunikace. */
+  [data-theme="clovek"] {
+    --color-brand-dark: #1B4332;
+    --color-brand: #2D6A4F;
+    --color-brand-light: #52B788;
+    --color-brand-lighter: #D8F3DC;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: #F0F7F2;
+    --color-surface-border: #D1E7D5;
+    --color-text: #1A2E1E;
+    --color-text-muted: #5C7A63;
+    --color-text-inverted: #FFFFFF;
+    --theme-name: "Člověk";
+    --theme-hero-accent: #95D5B2;
+    --theme-hero-accent-soft: rgba(149, 213, 178, 0.8);
+    --theme-footer-border: #145a32;
+  }
+
+  /* ── TÉMA 3: MAJÁK ────────────────────────────────────────── */
+  /* Hluboká navy + zlatá — inspirováno "Světlo tma nepohltí".
+     Dramatické, odhodlané, bezpečnostní. Maják jako symbol.
+     Pro: bezpečnostní témata, zahraniční politika, krize. */
+  [data-theme="majak"] {
+    --color-brand-dark: #0F172A;
+    --color-brand: #B45309;
+    --color-brand-light: #D97706;
+    --color-brand-lighter: #FEF3C7;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: #FFFBEB;
+    --color-surface-border: #E5E0D5;
+    --color-text: #1C1917;
+    --color-text-muted: #78716C;
+    --color-text-inverted: #FFFFFF;
+    --theme-name: "Maják";
+    --theme-hero-accent: #FCD34D;
+    --theme-hero-accent-soft: rgba(252, 211, 77, 0.8);
+    --theme-footer-border: #1e293b;
+  }
+
+  /* ── TÉMA 4: FACEBOOK (as-is) ──────────────────────────────── */
+  /* Kopíruje aktuální FB/SM brand — sytá královská modrá #26348B
+     + výrazná žlutá #F4F400 z loga "Světlo tma nepohltí".
+     Vysoký kontrast, energické, okamžitě rozpoznatelné.
+     Pro: konzistence se stávajícími SM kanály. */
+  [data-theme="facebook"] {
+    --color-brand-dark: #1A2468;
+    --color-brand: #26348B;
+    --color-brand-light: #3B4DAE;
+    --color-brand-lighter: #E8EAF6;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: #F5F5FA;
+    --color-surface-border: #D1D5E8;
+    --color-text: #1A1A2E;
+    --color-text-muted: #5C5C7A;
+    --color-text-inverted: #FFFFFF;
+    --theme-name: "Facebook";
+    --theme-hero-accent: #F4F400;
+    --theme-hero-accent-soft: rgba(244, 244, 0, 0.85);
+    --theme-footer-border: #141c52;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold tracking-tight;
+    color: var(--color-brand-dark);
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply mx-auto max-w-3xl px-5 sm:px-6;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-6xl px-5 sm:px-6;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: var(--color-brand);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-brand-dark);
+    @apply shadow-md -translate-y-px;
+  }
+  .btn-primary:focus {
+    --tw-ring-color: var(--color-brand);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-lg border-2 px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+  .btn-outline:hover {
+    background-color: var(--color-brand);
+    color: white;
+    @apply shadow-md -translate-y-px;
+  }
+  .btn-outline:focus {
+    --tw-ring-color: var(--color-brand);
+  }
+
+  .prose-custom h2 {
+    @apply mt-10 mb-4 text-2xl;
+  }
+
+  .prose-custom h3 {
+    @apply mt-8 mb-3 text-xl;
+  }
+
+  .prose-custom p {
+    @apply mb-5 leading-relaxed;
+    color: var(--color-text);
+  }
+
+  .prose-custom ul {
+    @apply mb-5 list-disc space-y-1.5 pl-6;
+    color: var(--color-text);
+  }
+
+  .prose-custom ol {
+    @apply mb-5 list-decimal space-y-1.5 pl-6;
+    color: var(--color-text);
+  }
+
+  .prose-custom blockquote {
+    @apply my-6 border-l-4 pl-5 italic;
+    border-color: var(--color-brand);
+    color: var(--color-text-muted);
+  }
+
+  .prose-custom a {
+    @apply underline underline-offset-2;
+    color: var(--color-brand);
+  }
+  .prose-custom a:hover {
+    color: var(--color-brand-dark);
+  }
+
+  .prose-custom strong {
+    @apply font-semibold;
+    color: var(--color-brand-dark);
+  }
+
+  .prose-custom img {
+    @apply my-6 rounded-xl;
+  }
+
+  /* Theme-aware text for dark (brand-dark bg) sections */
+  .dark-section-text {
+    color: var(--theme-hero-accent);
+  }
+  .dark-section-text-soft {
+    color: var(--theme-hero-accent-soft);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DEVELOPMENT BAR
+   Skrytý ve výchozím stavu. Aktivace přes devtools console:
+   __devbar()
+   ═══════════════════════════════════════════════════════════════ */
+
+#dev-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 2px solid #334155;
+  padding: 10px 20px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+#dev-bar.active {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#dev-bar .dev-label {
+  color: #f59e0b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+#dev-bar .dev-themes {
+  display: flex;
+  gap: 6px;
+}
+
+#dev-bar .dev-theme-btn {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  background: transparent;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 11px;
+  font-family: inherit;
+}
+
+#dev-bar .dev-theme-btn:hover {
+  background: #1e293b;
+  border-color: #64748b;
+}
+
+#dev-bar .dev-theme-btn.active {
+  background: #f59e0b;
+  color: #0f172a;
+  border-color: #f59e0b;
+  font-weight: 600;
+}
+
+#dev-bar .dev-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+#dev-bar .dev-info {
+  margin-left: auto;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+#dev-bar .dev-close {
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #475569;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+#dev-bar .dev-close:hover {
+  background: #7f1d1d;
+  border-color: #991b1b;
+  color: #fca5a5;
+}

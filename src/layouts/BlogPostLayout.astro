@@ -1,0 +1,89 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import CategoryBadge from "@/components/CategoryBadge.astro";
+import { site } from "@/data/site";
+import type { Category } from "@/data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: Category;
+  tags?: string[];
+  image?: string;
+}
+
+const { title, description, date, category, tags, image } = Astro.props;
+
+const formattedDate = date.toLocaleDateString("cs-CZ", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const pageTitle = `${title} — ${site.name}`;
+---
+
+<BaseLayout title={pageTitle} description={description} ogImage={image}>
+  <article class="py-12 md:py-20">
+    <div class="container-narrow">
+      <!-- Header -->
+      <header class="mb-10">
+        <div class="mb-4 flex flex-wrap items-center gap-3">
+          <CategoryBadge category={category} />
+          <time datetime={date.toISOString()} class="text-sm text-text-muted">
+            {formattedDate}
+          </time>
+        </div>
+        <h1 class="text-3xl leading-tight md:text-4xl lg:text-5xl">
+          {title}
+        </h1>
+        {
+          tags && tags.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span class="rounded-full bg-surface-muted px-3 py-1 text-xs text-text-muted">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+      </header>
+
+      <!-- Content -->
+      <div class="prose-custom">
+        <slot />
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-12 border-t border-surface-border pt-8">
+        <div
+          class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <a href="/blog" class="text-brand hover:text-brand-dark font-medium">
+            &larr; Zpět na články
+          </a>
+          <div class="flex gap-3">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(site.url + Astro.url.pathname)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-lg bg-surface-muted px-4 py-2 text-sm text-text-muted transition-colors hover:bg-brand-lighter hover:text-brand"
+            >
+              Sdílet na Facebooku
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(site.url + Astro.url.pathname)}&text=${encodeURIComponent(title)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-lg bg-surface-muted px-4 py-2 text-sm text-text-muted transition-colors hover:bg-brand-lighter hover:text-brand"
+            >
+              Sdílet na X
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>

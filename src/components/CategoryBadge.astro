@@ -1,0 +1,15 @@
+---
+import { site } from "@/data/site";
+import type { Category } from "@/data/site";
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const config = site.categories[category];
+---
+
+<span class:list={["inline-block rounded-full px-3 py-1 text-xs font-medium", config.color]}>
+  {config.label}
+</span>

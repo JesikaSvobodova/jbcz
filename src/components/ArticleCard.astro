@@ -1,0 +1,41 @@
+---
+import CategoryBadge from "./CategoryBadge.astro";
+import type { Category } from "@/data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: Category;
+  slug: string;
+}
+
+const { title, description, date, category, slug } = Astro.props;
+
+const formattedDate = date.toLocaleDateString("cs-CZ", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<article class="group">
+  <a
+    href={`/blog/${slug}`}
+    class="flex flex-col rounded-2xl border border-surface-border bg-white p-6 transition-all hover:border-brand/30 hover:shadow-lg sm:p-8"
+  >
+    <div class="mb-3 flex flex-wrap items-center gap-3">
+      <CategoryBadge category={category} />
+      <time datetime={date.toISOString()} class="text-sm text-text-muted">
+        {formattedDate}
+      </time>
+    </div>
+    <h3 class="mb-2 text-lg font-bold text-brand-dark transition-colors group-hover:text-brand sm:text-xl">
+      {title}
+    </h3>
+    <p class="text-sm leading-relaxed text-text-muted">{description}</p>
+    <span class="mt-4 text-sm font-medium text-brand">
+      Číst článek &rarr;
+    </span>
+  </a>
+</article>
