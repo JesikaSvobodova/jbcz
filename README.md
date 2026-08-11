@@ -27,7 +27,8 @@ soubor nepustí dál. Podrobnosti v [PROVOZ.md](PROVOZ.md).
 
 | Chci… | Kam |
 |---|---|
-| **upravit web** (text, fotku, článek) | [NAVOD.md](NAVOD.md) — návod pro každého, nic technického není potřeba |
+| **upravit web** a mít to na jedné stránce | 👉 **[TAHAK.md](TAHAK.md)** — tři kroky, dá se vytisknout |
+| **upravit web** a vědět víc | [NAVOD.md](NAVOD.md) — podrobný návod, nic technického není potřeba |
 | **spravovat projekt** (nasazení, pojistky, nastavení GitHubu) | [PROVOZ.md](PROVOZ.md) |
 | **vědět, jak se má chovat AI agent** | [CLAUDE.md](CLAUDE.md) |
 

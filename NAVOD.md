@@ -3,6 +3,9 @@
 Návod pro každého. **Nemusíš umět nic technického** — nepotřebuješ znát git,
 programování ani co je to commit. Stačí umět napsat větu.
 
+> 💡 Chceš to na jednu stránku k vytisknutí? Vezmi si **[TAHAK.md](TAHAK.md)**.
+> Tenhle návod je ta podrobnější verze.
+
 ---
 
 ## Jak to celé funguje
