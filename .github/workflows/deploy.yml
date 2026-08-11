@@ -1,10 +1,22 @@
-name: Build & Deploy
+# Nasazení webu na GitHub Pages.
+#
+# Jeden web, dva obsahy:
+#   main   → https://www.janbartosek.cz/          (ostrá verze)
+#   nahled → https://www.janbartosek.cz/nahled/   (testovací verze, noindex)
+#
+# GitHub Pages umí na jeden repozitář jen jedno nasazení, proto se náhled
+# staví do podadresáře. Při každém pushi (do main i do nahled) se sestaví
+# obě větve najednou a nahraje se jeden společný výsledek.
+#
+# Když se rozbije build náhledu, ostrá verze se nasadí normálně a na
+# /nahled/ se objeví stránka s vysvětlením. Když se rozbije build větve
+# main, nenasadí se nic a na webu zůstane poslední funkční verze.
+name: Nasazení webu
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [main, nahled]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,42 +24,174 @@ permissions:
   id-token: write
 
 concurrency:
-  group: deploy
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
+
+env:
+  NAHLED_PREFIX: /nahled
 
 jobs:
-  build-and-deploy:
+  guard:
+    name: Guard — kontrola citlivého obsahu
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
+      - name: Stáhnout repozitář
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Nainstalovat Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Zkontrolovat celý repozitář
+        run: node scripts/guard.mjs
+
+      - name: Zkontrolovat soubory z tohoto pushe
+        if: github.event_name == 'push'
+        env:
+          PREDCHOZI: ${{ github.event.before }}
+          AKTUALNI: ${{ github.sha }}
+        run: |
+          if [ -z "$PREDCHOZI" ] || [ "$PREDCHOZI" = "0000000000000000000000000000000000000000" ]; then
+            echo "Nová větev — celý strom už zkontrolován výše."
+            exit 0
+          fi
+          if git cat-file -e "$PREDCHOZI^{commit}" 2>/dev/null; then
+            node scripts/guard.mjs --range "$PREDCHOZI..$AKTUALNI"
+          else
+            echo "Předchozí commit není dostupný — kontrola rozsahu se přeskakuje."
+          fi
+
+  build:
+    name: Sestavit ostrou verzi i náhled
+    needs: guard
+    runs-on: ubuntu-latest
+    outputs:
+      nahled-stav: ${{ steps.stav.outputs.nahled }}
+    steps:
+      - name: Stáhnout ostrou větev (main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: produkce
+
+      - name: Zjistit, jestli náhledová větev existuje
+        id: vetev
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          if git ls-remote --exit-code --heads "$REPO_URL" nahled >/dev/null 2>&1; then
+            echo "existuje=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "existuje=false" >> "$GITHUB_OUTPUT"
+            echo "Větev 'nahled' zatím neexistuje — nasadí se jen ostrá verze."
+          fi
+
+      - name: Stáhnout náhledovou větev (nahled)
+        if: steps.vetev.outputs.existuje == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: nahled
+          path: nahled
+
+      - name: Nainstalovat Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: produkce/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Sestavit ostrou verzi
+        working-directory: produkce
+        run: |
+          npm ci
+          npm run build
 
-      - name: Build
-        run: npm run build
+      - name: Sestavit náhled
+        id: build-nahled
+        if: steps.vetev.outputs.existuje == 'true'
+        continue-on-error: true
+        working-directory: nahled
+        run: |
+          npm ci
+          npm run build
 
-      - name: Setup Pages
-        if: github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v5
+      - name: Upravit náhled pro podadresář /nahled/
+        id: uprava-nahled
+        if: steps.build-nahled.outcome == 'success'
+        continue-on-error: true
+        run: |
+          node produkce/scripts/make-preview.mjs \
+            --dir nahled/dist \
+            --prefix "$NAHLED_PREFIX" \
+            --branch nahled \
+            --commit "$(git -C nahled rev-parse HEAD)"
 
-      - name: Upload artifact
-        if: github.ref == 'refs/heads/main'
+      - name: Poskládat web
+        id: stav
+        env:
+          NAHLED_BUILD: ${{ steps.uprava-nahled.outcome }}
+          NAHLED_VETEV: ${{ steps.vetev.outputs.existuje }}
+        run: |
+          mkdir -p web
+          cp -r produkce/dist/. web/
+
+          if [ "$NAHLED_BUILD" = "success" ]; then
+            mkdir -p "web${NAHLED_PREFIX}"
+            cp -r nahled/dist/. "web${NAHLED_PREFIX}/"
+            echo "nahled=ok" >> "$GITHUB_OUTPUT"
+          elif [ "$NAHLED_VETEV" = "true" ]; then
+            mkdir -p "web${NAHLED_PREFIX}"
+            cp produkce/scripts/nahled-chyba.html "web${NAHLED_PREFIX}/index.html"
+            echo "nahled=chyba" >> "$GITHUB_OUTPUT"
+          else
+            echo "nahled=neexistuje" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "Nasazované soubory:"
+          find web -maxdepth 2 -type d | sort
+
+      - name: Poslední kontrola nasazovaných souborů
+        run: node produkce/scripts/check-dist.mjs web
+
+      - name: Nahrát výsledek
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: web
 
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
-        id: deployment
+  deploy:
+    name: Nasadit na GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.nasazeni.outputs.page_url }}
+    steps:
+      - name: Připravit Pages
+        uses: actions/configure-pages@v5
+
+      - name: Nasadit
+        id: nasazeni
         uses: actions/deploy-pages@v4
+
+      - name: Shrnutí pro člověka
+        env:
+          NAHLED_STAV: ${{ needs.build.outputs.nahled-stav }}
+        run: |
+          {
+            echo "## Web nasazen"
+            echo ""
+            echo "| Verze | Adresa | Stav |"
+            echo "|---|---|---|"
+            echo "| Ostrá (větev \`main\`) | https://www.janbartosek.cz/ | ✅ nasazeno |"
+            case "$NAHLED_STAV" in
+              ok)    echo "| Náhled (větev \`nahled\`) | https://www.janbartosek.cz/nahled/ | ✅ nasazeno |" ;;
+              chyba) echo "| Náhled (větev \`nahled\`) | https://www.janbartosek.cz/nahled/ | ⚠️ build selhal |" ;;
+              *)     echo "| Náhled (větev \`nahled\`) | — | větev zatím neexistuje |" ;;
+            esac
+            echo ""
+            echo "Změna se projeví do zhruba minuty. Pokud vidíš starou verzi,"
+            echo "obnov stránku přes Ctrl+Shift+R (na Macu Cmd+Shift+R)."
+          } >> "$GITHUB_STEP_SUMMARY"

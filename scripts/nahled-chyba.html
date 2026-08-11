@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- Zobrazí se na /nahled/, když se testovací větev nepodaří sestavit. -->
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Náhled se nepodařilo sestavit</title>
+    <style>
+      body {
+        font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        max-width: 38rem;
+        margin: 12vh auto;
+        padding: 0 1.5rem;
+        color: #1f2937;
+      }
+      h1 { font-size: 1.5rem; margin: 0 0 0.75rem; }
+      code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; }
+      a { color: #2e7ab8; }
+      .ok { background: #ecfdf5; border-left: 4px solid #10b981; padding: 0.75rem 1rem; margin: 1.5rem 0; }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 Náhled se nepodařilo sestavit</h1>
+
+    <div class="ok">
+      <strong>Ostrého webu se to netýká.</strong> Produkční verze na
+      <a href="/">janbartosek.cz</a> běží dál a je nedotčená.
+    </div>
+
+    <p>
+      Poslední změna v testovací větvi obsahuje chybu, kvůli které se stránka
+      nedala vygenerovat.
+    </p>
+
+    <p>
+      <strong>Co s tím:</strong> napiš Claudovi
+      <code>náhled se nepostavil, oprav to</code> — podrobný výpis chyby najde
+      v záložce <em>Actions</em> na GitHubu.
+    </p>
+
+    <p><a href="/">← Zpět na ostrou verzi webu</a></p>
+  </body>
+</html>

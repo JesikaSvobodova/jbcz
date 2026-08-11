@@ -7,7 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "guard": "node scripts/guard.mjs",
+    "guard:test": "node scripts/guard.test.mjs",
+    "kontrola": "node scripts/guard.mjs && node scripts/guard.test.mjs && astro build && node scripts/check-dist.mjs dist"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

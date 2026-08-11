@@ -2,137 +2,87 @@
 
 Osobní web poslance Ing. Jana Bartoška, MPA (KDU-ČSL, Jihočeský kraj).
 
-**Stack:** Astro + Tailwind CSS + Markdown. Výstupem je čistý statický HTML bez databáze.
+| | Adresa |
+|---|---|
+| **Ostrý web** | https://www.janbartosek.cz/ |
+| **Testovací verze** | https://www.janbartosek.cz/nahled/ |
 
 ---
 
-## Rychlý start
+## ⚠️ Tenhle repozitář je veřejný
+
+Kdokoliv na internetu si může přečíst všechno, co v něm je — včetně celé historie.
+Smazání souboru nepomůže, stará verze v historii zůstává.
+
+**Nikdy sem nedávej** strategie, analýzy, interní poznámky, smlouvy, nabídky,
+hesla, klíče ani osobní údaje. Potřebuješ mít takové podklady po ruce? Ulož je
+do složky `_local/` — ta zůstane jen na tvém disku.
+
+Projekt to hlídá sám: guard kontroluje každý commit i každé nasazení a citlivý
+soubor nepustí dál. Podrobnosti v [PROVOZ.md](PROVOZ.md).
+
+---
+
+## Kam jít dál
+
+| Chci… | Kam |
+|---|---|
+| **upravit web** (text, fotku, článek) | [NAVOD.md](NAVOD.md) — návod pro každého, nic technického není potřeba |
+| **spravovat projekt** (nasazení, pojistky, nastavení GitHubu) | [PROVOZ.md](PROVOZ.md) |
+| **vědět, jak se má chovat AI agent** | [CLAUDE.md](CLAUDE.md) |
+
+---
+
+## Nejkratší možný návod
+
+Otevři si projekt v Claudovi a napiš normální větou, co chceš změnit:
+
+> Změň text v úvodu na „Pracuji pro bezpečné Česko."
+
+Claude to udělá, nasadí na testovací verzi a pošle ti odkaz. Podíváš se, a když
+to tak chceš, řekneš „pusť to na ostrý web". Nic se nezveřejní bez tvého svolení.
+
+Nevíš, co dál? Napiš `/pomoc`.
+
+---
+
+## Pro vývojáře
+
+**Stack:** Astro 5 + Tailwind CSS 3 + Markdown → statické HTML, žádná databáze.
 
 ```bash
-npm install      # instalace závislostí
-npm run dev      # lokální vývojový server (http://localhost:4321)
-npm run build    # produkční build → složka dist/
-npm run preview  # náhled produkčního buildu
+npm install                    # závislosti
+bash scripts/install-hooks.sh  # zapnout bezpečnostní kontrolu před commitem
+npm run dev                    # http://localhost:4321
+npm run build                  # produkční build do dist/
+npm run preview                # náhled produkčního buildu
 ```
 
----
-
-## Jak přidat článek
-
-1. Vytvořit soubor `src/content/blog/nazev-clanku.md`
-2. Přidat frontmatter:
-   ```markdown
-   ---
-   title: "Název článku"
-   description: "Krátký popis"
-   date: 2026-03-01
-   category: "bezpecnost"
-   tags: ["tag1", "tag2"]
-   draft: false
-   ---
-   ```
-3. Napsat obsah v Markdown
-4. `git push` → web se automaticky aktualizuje
-
-**Kategorie:** `bezpecnost`, `snemovna`, `jihocesky-kraj`, `osobni`
-
----
-
-## Jak upravit obsah webu
-
-Veškerý editovatelný obsah je v datových souborech — **ne v šablonách**:
-
-| Co chci změnit | Kde to najdu |
-|----------------|-------------|
-| Jméno, kontakty, sociální sítě, texty na homepage | `src/data/site.ts` |
-| Stránka "O mně" — životopis, časová osa, funkce | `src/data/about.ts` |
-| Články na blogu | `src/content/blog/*.md` |
-| Dokumentace projektu | `docs/` |
-
----
-
-## Build a deploy
-
-### Build
-
-```bash
-npm run build
-```
-
-Výstupem je složka `dist/` — obsahuje **čistý statický HTML, CSS a JS**. Tuto složku stačí nahrát na jakýkoliv hosting.
-
-### Varianta 1: Cloudflare Pages (doporučeno, zdarma)
-
-1. Vytvořit účet na [Cloudflare](https://dash.cloudflare.com/)
-2. Pages → Create a project → Connect to Git
-3. Vybrat tento repozitář
-4. Build command: `npm run build`
-5. Build output directory: `dist`
-6. Nasměrovat doménu janbartosek.cz na Cloudflare
-
-### Varianta 2: GitHub Pages (zdarma)
-
-1. V repozitáři: Settings → Pages → Source: GitHub Actions
-2. V `.github/workflows/deploy.yml` odkomentovat blok `deploy-github-pages`
-3. Push na `main` → automatický deploy
-
-### Varianta 3: Vercel (zdarma)
-
-1. [vercel.com](https://vercel.com) → Import Git Repository
-2. Framework preset: Astro
-3. Deploy — hotovo
-
-### Varianta 4: Jakýkoliv hosting (Wedos, Forpsi, ...)
-
-1. `npm run build`
-2. Obsah složky `dist/` nahrát přes FTP/SFTP na hosting
-3. Nasměrovat doménu na hosting
-
-### Varianta 5: Ruční deploy přes GitHub Actions artifact
-
-1. Push na `main`
-2. GitHub Actions → poslední run → Download artifact `site`
-3. Rozbalit ZIP a nahrát na hosting
-
----
-
-## CI/CD pipeline
-
-Při každém push na `main` se automaticky:
-
-1. Nainstalují závislosti
-2. Spustí se build
-3. Výsledný artefakt se uloží
-
-Pro automatický deploy stačí odkomentovat příslušný blok v `.github/workflows/deploy.yml`.
-
----
-
-## Struktura projektu
+Struktura:
 
 ```
-├── docs/                   # Projektová dokumentace (strategie, brand, zadání)
-├── public/                 # Statické soubory (obrázky, favicon, robots.txt)
 ├── src/
-│   ├── components/         # Astro komponenty (Header, Footer, Hero, ...)
-│   ├── content/blog/       # Markdown články
-│   ├── data/               # Editovatelná data (site.ts, about.ts)
-│   ├── layouts/            # Layouty stránek
-│   ├── pages/              # Routy (homepage, blog, kontakt, o-mne)
-│   └── styles/             # Globální CSS
-├── .github/workflows/      # CI/CD pipeline
-├── astro.config.mjs        # Konfigurace Astro
-├── tailwind.config.mjs     # Konfigurace Tailwind
-└── package.json
+│   ├── data/          ← texty a kontakty (site.ts, about.ts)
+│   ├── content/blog/  ← články v Markdownu
+│   ├── components/    ← Astro komponenty
+│   ├── layouts/       ← layouty stránek
+│   ├── pages/         ← routy
+│   └── styles/        ← globální CSS
+├── public/            ← statické soubory (obrázky, robots.txt, CNAME)
+├── assets/            ← originály fotek před zmenšením
+├── scripts/           ← guard, příprava náhledu, kontrola buildu
+├── .githooks/         ← kontrola před commitem
+├── .claude/           ← pravidla, hooks a příkazy pro AI agenta
+└── .github/workflows/ ← nasazení a kontroly
 ```
 
----
+Kontrola před commitem — stejná, jakou pouští CI:
 
-## Dokumentace
+```bash
+npm run guard        # jen kontrola citlivého obsahu
+npm run kontrola     # guard + jeho testy + build + kontrola výstupu
+node scripts/guard.mjs --explain   # vypíše platná pravidla
+```
 
-| Dokument | Popis |
-|----------|-------|
-| [Analýza osobnosti](docs/analyza-osobnosti.md) | Kdo je Jan Bartošek, hodnoty, kariéra |
-| [Marketingová strategie](docs/marketingova-strategie.md) | Cílové skupiny, obsah, kanály |
-| [Brand a komunikace](docs/brand-a-komunikace.md) | Vizuální identita, komunikační principy |
-| [Technické zadání](docs/technicke-zadani.md) | Architektura, stack, fáze implementace |
+Git hook ji stejně spustí sám při každém commitu. Obcházet ji přes `--no-verify`
+je zakázané — proč, je v [PROVOZ.md](PROVOZ.md).

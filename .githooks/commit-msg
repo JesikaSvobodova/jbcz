@@ -1,0 +1,15 @@
+#!/bin/sh
+# Kontrola textu commit zprávy — i do ní se dá omylem vložit heslo nebo token.
+set -u
+
+if ! command -v node >/dev/null 2>&1; then
+  exit 0
+fi
+
+REPO="$(git rev-parse --show-toplevel)"
+
+if [ ! -f "$REPO/scripts/guard.mjs" ]; then
+  exit 0
+fi
+
+node "$REPO/scripts/guard.mjs" --message "$1" || exit 1

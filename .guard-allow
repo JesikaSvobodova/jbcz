@@ -1,0 +1,17 @@
+# Výjimky z bezpečnostní kontroly (scripts/guard.mjs).
+#
+# ⚠️  Každý řádek tady je vědomé rozhodnutí zveřejnit něco, co pojistka
+#     označila jako riziko. Rozhoduje o tom super admin, ne správce obsahu.
+#     Nikdy neobcházej guard přes `git commit --no-verify` — tím se vypne celý.
+#
+# Formát:
+#     cesta/k/souboru | pravidlo
+#     cesta/k/souboru              (bez pravidla = všechna pravidla pro ten soubor)
+#
+# Příklady (zakomentované, nic teď neplatí):
+#     public/dokumenty/agenda.pdf | path:forbidden-ext
+#     src/data/kontakty.ts | pii:iban
+#
+# Názvy pravidel vypíše:  node scripts/guard.mjs --explain
+# Rozšíření povolených adresářů se NEDĚLÁ tady, ale v scripts/guard.mjs
+# (seznamy ALLOWED_DIRS a ALLOWED_ROOT_FILES).

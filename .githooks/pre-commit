@@ -1,0 +1,24 @@
+#!/bin/sh
+# Poslední zastávka před vznikem commitu.
+#
+# Až commit vznikne a pushne se, obsah je ve veřejné historii navždy.
+# Proto se guard pouští TADY, ne až v CI.
+#
+# Instalace: bash scripts/install-hooks.sh
+set -u
+
+if ! command -v node >/dev/null 2>&1; then
+  printf '\n  ⛔ Není nainstalovaný Node.js, takže nejde spustit bezpečnostní kontrola.\n'
+  printf '     Commit se pro jistotu zastavuje. Nainstaluj Node.js 22 a zkus to znovu.\n\n'
+  exit 1
+fi
+
+REPO="$(git rev-parse --show-toplevel)"
+
+if [ ! -f "$REPO/scripts/guard.mjs" ]; then
+  printf '\n  ⛔ Chybí scripts/guard.mjs — bezpečnostní kontrola nejde spustit.\n'
+  printf '     Commit se pro jistotu zastavuje.\n\n'
+  exit 1
+fi
+
+node "$REPO/scripts/guard.mjs" --staged || exit 1
