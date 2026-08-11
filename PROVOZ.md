@@ -146,6 +146,11 @@ Tohle nejde udělat z repozitáře, musí se naklikat v **Settings**.
       vyžadovat úspěšný check **„Kontrola citlivého obsahu"**
 - [ ] **Actions → General → Workflow permissions: `Read repository contents`**
       (workflow si vyšší oprávnění vyžádá sám v `permissions:`)
+- [ ] **General → Pull Requests → `Allow auto-merge`: zapnout**
+      → Bez tohohle je v Claude Code UI volba **„Auto-merge when ready"**
+      zašedlá a nejde zaškrtnout. UI neřekne proč — vypadá to jako rozbité
+      tlačítko, ale je to tahle nezapnutá volba v repozitáři.
+      GitHub ji má u nových repozitářů vypnutou.
 - [ ] **Vytvořit větev `nahled`** — z aktuálního `main`, až budou tyhle změny
       v `main`. Jinak na ní nebude nový workflow.
 
