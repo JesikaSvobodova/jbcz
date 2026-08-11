@@ -24,3 +24,7 @@ Uživatel chce vrátit zpátky změnu na ostrém webu. $ARGUMENTS
 
 5. Nabídni, že stejný stav nasadíš i na testovací verzi, ať v ní není zmatek:
    `git push --force-with-lease origin HEAD:nahled`
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.

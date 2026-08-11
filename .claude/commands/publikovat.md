@@ -27,3 +27,7 @@ Pak:
 Když push selže kvůli tomu, že se `main` mezitím pohnul, udělej
 `git rebase origin/main`, znovu ověř `npm run build` a zkus to znovu.
 Nikdy nepoužívej force push do `main`.
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.

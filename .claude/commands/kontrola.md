@@ -23,3 +23,7 @@ Pak shrň:
 
 Nakonec zmiň případná upozornění na velké obrázky — u fotek nad 2 MB nabídni,
 že je zmenšíš, protože zpomalují načítání webu.
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.

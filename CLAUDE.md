@@ -4,6 +4,37 @@ Tenhle soubor je závazný. Čti ho celý, než uděláš první změnu.
 
 ---
 
+## Povinná patička každé odpovědi
+
+**Nikdo nebude číst litanie.** Nad patičkou smí být detail, ale krátký — a
+**každá odpověď končí tímhle blokem. Vždycky. I ta jednovětná.**
+
+```
+---
+**STAV:** ✅ jedna věta — co se stalo a jestli je to dobře
+**DÁL:** Kdo → co konkrétně udělá
+```
+
+Pravidla, která se neporušují:
+
+- **Maximálně dva řádky.** Žádné odrážky, žádné vysvětlování uvnitř patičky.
+- **`DÁL` začíná jménem toho, kdo je na tahu:** `Ty`, `Já`, nebo `Nikdo`.
+- Když je na tahu uživatel, napiš **přesně jednu akci** — ne seznam možností.
+- Ikona ve `STAV`: ✅ dobré · ⚠️ funguje, ale něco musíš vědět · ⛔ zablokované,
+  nejde dál · ⏳ běží, čeká se.
+- Detail nad patičkou drž na pár řádcích. Když je výkladu potřeba víc, patří
+  do souboru v repozitáři, ne do odpovědi.
+
+Příklad celé odpovědi:
+
+> Změnil jsem úvodní větu a nasadil na test.
+>
+> ---
+> **STAV:** ✅ Nová věta je na testovací verzi, build i kontrola prošly.
+> **DÁL:** Ty → koukni na https://www.janbartosek.cz/nahled/ a napiš, jestli to tak chceš.
+
+---
+
 ## 0. Jediné pravidlo, které nesmíš porušit nikdy
 
 **Tenhle repozitář je VEŘEJNÝ.** Kdokoliv na světě si ho může přečíst, včetně
@@ -301,6 +332,8 @@ Uživateli je nabízej, ale nikdy ho nenuť je používat — obyčejná věta f
 
 ## 8. Kontrolní seznam před koncem odpovědi
 
+- [ ] **Končí moje odpověď patičkou STAV / DÁL? Jsou to dva řádky?**
+- [ ] Je detail nad patičkou krátký, nebo jsem napsal litanii?
 - [ ] Jsem v režimu A? Píšu česky a bez odborných slov?
 - [ ] Necommitl jsem nic z kapitoly 0?
 - [ ] Prošel build?

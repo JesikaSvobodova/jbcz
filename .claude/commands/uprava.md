@@ -32,3 +32,7 @@ Postupuj přesně podle CLAUDE.md, kapitola 2. Ve zkratce:
    > pustím na ostrý web.
 
 **Nepublikuj.** Na produkci to jde až po jeho výslovném souhlasu.
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.

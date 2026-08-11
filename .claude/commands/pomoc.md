@@ -30,3 +30,7 @@ pojmů. Použij zhruba tenhle text, ale přizpůsob ho tomu, na co se ptal:
 
 Když se ptal na něco konkrétního, odpověz nejdřív na to a tenhle přehled přidej
 až pod odpověď.
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.

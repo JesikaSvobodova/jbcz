@@ -30,3 +30,7 @@ Pak jednou větou napiš jednu z těchto situací:
 
 Nezmiňuj slova jako commit, branch, rebase ani SHA — pokud uživatel neřekl,
 že je expert.
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.

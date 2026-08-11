@@ -17,3 +17,7 @@ Nasaď aktuální rozdělanou práci na testovací verzi webu.
    > Až se na to podíváš, napiš mi, jestli to tak chceš.
 
 Když větev `nahled` ještě neexistuje, push ji založí sám — nic dalšího neřeš.
+
+---
+
+Odpověď ukonči povinnou patičkou **STAV / DÁL** (CLAUDE.md). Drž se dvou řádků.
