@@ -1,9 +1,83 @@
-node_modules/
-dist/
-.astro/
+# =====================================================================
+#  TENTO REPOZITÁŘ JE VEŘEJNÝ. Čte ho kdokoliv na internetu.
+#  Cokoliv se jednou commitne, zůstane dohledatelné v historii navždy —
+#  i když to další commit smaže.
+# =====================================================================
+
+# --- Interní podklady: NIKDY do repozitáře ---------------------------
+# Potřebuješ mít strategii, analýzu, nabídku nebo poznámky po ruce?
+# Ulož je do _local/ — složka zůstane jen na tvém disku a nikam se
+# neodešle. Guard ji navíc odmítne pustit do commitu.
+_local/
+local/
+interni/
+internal/
+private/
+soukrome/
+podklady/
+poznamky/
+notes/
+docs/
+strategie/
+analyzy/
+marketing/
+
+# Kancelářské dokumenty a exporty dat
+*.doc
+*.docx
+*.odt
+*.rtf
+*.xls
+*.xlsx
+*.ods
+*.csv
+*.ppt
+*.pptx
+*.odp
+*.pages
+*.numbers
+*.key
+*.msg
+*.eml
+*.mbox
+*.zip
+*.rar
+*.7z
+*.sql
+*.sqlite
+*.db
+
+# Přístupové údaje a klíče
 .env
 .env.*
 !.env.example
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.ppk
+id_rsa
+id_ed25519
+credentials*
+secrets*
+
+# --- Build a nástroje ------------------------------------------------
+node_modules/
+dist/
+dist-nahled/
+.astro/
+.vercel/
+.wrangler/
 *.log
+.cache/
+
+# --- Systémové smetí -------------------------------------------------
 .DS_Store
 Thumbs.db
+*.swp
+*~
+
+# --- Lokální stav AI agenta (nepatří do repozitáře) ------------------
+.claude/settings.local.json
+.claude/.rezim-superadmin

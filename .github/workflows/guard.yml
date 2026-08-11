@@ -1,0 +1,48 @@
+# Kontrola citlivého obsahu na VŠECH větvích a pull requestech.
+#
+# Deploy má vlastní guard krok, tenhle workflow chytá i větve, které se
+# nenasazují — aby se na nic nepřišlo až ve chvíli publikace.
+name: Guard
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    name: Kontrola citlivého obsahu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stáhnout repozitář
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Nainstalovat Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Vypsat platná pravidla
+        run: node scripts/guard.mjs --explain
+
+      - name: Zkontrolovat celý repozitář
+        run: node scripts/guard.mjs
+
+      - name: Zkontrolovat změny v pull requestu
+        if: github.event_name == 'pull_request'
+        env:
+          ZAKLAD: ${{ github.event.pull_request.base.sha }}
+          HLAVA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/guard.mjs --range "$ZAKLAD..$HLAVA"
+
+      - name: Otestovat samotný guard
+        run: node scripts/guard.test.mjs

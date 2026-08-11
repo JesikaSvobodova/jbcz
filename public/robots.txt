@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://janbartosek.cz/sitemap-index.xml
+# Testovací verze webu — nesmí se objevit ve vyhledávačích.
+Disallow: /nahled/
+
+Sitemap: https://www.janbartosek.cz/sitemap-index.xml
