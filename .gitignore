@@ -7,3 +7,7 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# Lokální nastavení nástrojů (.claude/settings.json je naopak verzovaný)
+.claude/settings.local.json
+.claude/worktrees/

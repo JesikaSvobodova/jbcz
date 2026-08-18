@@ -47,6 +47,32 @@ export const site = {
     instagram: "https://www.instagram.com/bartosek_jan",
   },
 
+  /**
+   * Umami — vlastní analytika na vlastní instanci (self-hosted).
+   *
+   * Bez cookies, bez zápisu do zařízení návštěvníka, data zůstávají na
+   * vlastním serveru — proto web nemá a nepotřebuje cookie lištu.
+   *
+   * `websiteId` NENÍ secret. Je veřejně v HTML každé stránky; je to
+   * identifikátor webu na měřicí instanci, ne přístupový údaj.
+   *
+   * `scriptUrl` má schválně jedno lomítko za doménou. Varianta s dvojitým
+   * (`analytics.svobol.com//svb.js`) odpovídá 308 redirectem na `/svb.js`,
+   * tzn. hop navíc při každém načtení stránky. Endpoint pro sběr si skript
+   * odvozuje z adresáře vlastního `src` — vyjde stejně,
+   * `https://analytics.svobol.com/svb-collect`.
+   *
+   * `domains` omezuje sběr na produkční doménu, aby localhost, náhledové
+   * buildy a CI nezanášely reálnou statistiku. Uvedený je i apex
+   * `janbartosek.cz`, který dnes odpovídá 301 přesměrováním na `www` —
+   * kdyby se to někdy otočilo, měření nezmlkne.
+   */
+  analytics: {
+    scriptUrl: "https://analytics.svobol.com/svb.js",
+    websiteId: "792a6bb4-9173-482d-b4ab-c73665b72437",
+    domains: "www.janbartosek.cz,janbartosek.cz",
+  },
+
   /** Hero sekce na homepage */
   hero: {
     headline: "Jsem Jan Bartošek, poslanec za Jihočeský kraj a člen KDU-ČSL.",

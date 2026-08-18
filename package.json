@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:analytics": "node scripts/check-analytics.mjs",
+    "verify": "npm run build && npm run check:analytics"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

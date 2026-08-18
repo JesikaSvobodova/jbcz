@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm ci)",
+      "Bash(npm install)",
+      "Bash(npm run build)",
+      "Bash(npm run check:analytics)",
+      "Bash(npm run dev)",
+      "Bash(npm run preview)",
+      "Bash(npm run verify)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git status *)",
+      "Bash(git switch *)",
+      "Bash(git merge --ff-only *)",
+      "Bash(git push *)"
+    ],
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push --delete *)",
+      "Bash(git push --mirror *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Read(./**/id_rsa*)",
+      "Read(./**/id_ed25519*)",
+      "Edit(./dist/**)",
+      "Edit(./.astro/**)",
+      "Edit(./node_modules/**)"
+    ]
+  }
+}

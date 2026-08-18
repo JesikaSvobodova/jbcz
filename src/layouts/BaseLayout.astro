@@ -68,6 +68,14 @@ const ogImageURL = new URL(ogImage, site.url);
         sameAs: Object.values(site.social),
       })}
     />
+
+    <!-- Analytika (Umami) — konfigurace v src/data/site.ts, sběr jen na produkční doméně -->
+    <script
+      is:inline
+      defer
+      src={site.analytics.scriptUrl}
+      data-website-id={site.analytics.websiteId}
+      data-domains={site.analytics.domains}></script>
   </head>
   <body class="flex min-h-screen flex-col">
     <Header />

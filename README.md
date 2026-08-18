@@ -13,6 +13,7 @@ npm install      # instalace závislostí
 npm run dev      # lokální vývojový server (http://localhost:4321)
 npm run build    # produkční build → složka dist/
 npm run preview  # náhled produkčního buildu
+npm run verify   # build + kontrola analytiky (pouštěj před commitem)
 ```
 
 ---
@@ -48,6 +49,25 @@ Veškerý editovatelný obsah je v datových souborech — **ne v šablonách**:
 | Stránka "O mně" — životopis, časová osa, funkce | `src/data/about.ts` |
 | Články na blogu | `src/content/blog/*.md` |
 | Dokumentace projektu | `docs/` |
+| Analytika (Umami) | `src/data/site.ts` → `analytics` |
+
+---
+
+## Analytika
+
+Web měří návštěvnost vlastní **Umami** instancí na `analytics.svobol.com`
+(self-hosted, data zůstávají na vlastním serveru).
+
+- Konfigurace: `src/data/site.ts` → `analytics`. Měřicí skript vkládá
+  `src/layouts/BaseLayout.astro`, takže je automaticky na všech stránkách.
+- `websiteId` **není secret** — je veřejně v HTML každé stránky.
+- Umami je cookieless a nic nezapisuje do zařízení návštěvníka, proto web
+  **nemá a nepotřebuje cookie lištu**. Nepřidávej ji.
+- `data-domains` omezuje sběr na produkční doménu — localhost a náhledové
+  buildy se do statistiky nezapočítávají.
+- `npm run check:analytics` ověří nad `dist/`, že měřicí skript je na každé
+  stránce, správně nakonfigurovaný, a že web nesahá na žádný další cizí
+  origin. Stejný krok běží v CI před deployem.
 
 ---
 
@@ -120,6 +140,7 @@ Pro automatický deploy stačí odkomentovat příslušný blok v `.github/workf
 │   ├── layouts/            # Layouty stránek
 │   ├── pages/              # Routy (homepage, blog, kontakt, o-mne)
 │   └── styles/             # Globální CSS
+├── scripts/                # Kontrolní skripty (gates)
 ├── .github/workflows/      # CI/CD pipeline
 ├── astro.config.mjs        # Konfigurace Astro
 ├── tailwind.config.mjs     # Konfigurace Tailwind
