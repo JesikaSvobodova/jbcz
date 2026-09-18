@@ -1,0 +1,130 @@
+name: Staging náhled
+
+# Každá větev kromě main dostane vlastní chráněný náhled.
+# Produkce se nasazuje výhradně z main (deploy.yml) — odtud se tam nedostaneš.
+on:
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: staging-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  staging:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Zkontrolovat přístupy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+        run: |
+          missing=""
+          [ -z "${CLOUDFLARE_API_TOKEN:-}" ] && missing="$missing CLOUDFLARE_API_TOKEN"
+          [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ] && missing="$missing CLOUDFLARE_ACCOUNT_ID"
+          [ -z "${STAGING_PASSWORD:-}" ] && missing="$missing STAGING_PASSWORD"
+          if [ -n "$missing" ]; then
+            echo "::error::Chybí GitHub secrets:$missing — doplň je v Settings → Secrets and variables → Actions. Bez nich náhled nasadit nejde."
+            exit 1
+          fi
+          echo "Přístupy v pořádku."
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build a kontrola analytiky
+        run: npm run verify
+
+      - name: Odstranit sitemapu z náhledu
+        # Sitemapa se generuje s produkčními URL — v náhledu nemá co dělat.
+        run: rm -f dist/sitemap*.xml
+
+      - name: Připravit konfiguraci workeru
+        id: config
+        run: |
+          set -euo pipefail
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          NAME="$(node scripts/staging-name.mjs "$BRANCH")"
+          EXPIRES_AT="$(date -u -d '+5 days' +%Y-%m-%dT%H:%M:%SZ)"
+          {
+            echo "name=$NAME"
+            echo "expires_at=$EXPIRES_AT"
+            echo "branch=$BRANCH"
+          } >> "$GITHUB_OUTPUT"
+          cat > staging/wrangler.toml <<TOML
+          name = "$NAME"
+          main = "worker.js"
+          compatibility_date = "2025-03-01"
+          workers_dev = true
+
+          [assets]
+          directory = "../dist"
+          binding = "ASSETS"
+          run_worker_first = true
+
+          [vars]
+          EXPIRES_AT = "$EXPIRES_AT"
+          STAGING_USER = "nahled"
+          TOML
+          echo "— wrangler.toml —"
+          cat staging/wrangler.toml
+
+      - name: Nasadit worker
+        working-directory: staging
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+
+      - name: Nastavit heslo náhledu
+        working-directory: staging
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "${STAGING_PASSWORD:-}" ]; then
+            echo "::error::Chybí secret STAGING_PASSWORD — worker bez něj neservíruje nic (503)."
+            exit 1
+          fi
+          printf '%s' "$STAGING_PASSWORD" | npx wrangler secret put STAGING_PASSWORD
+
+      - name: Vypsat adresu náhledu
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          NAME: ${{ steps.config.outputs.name }}
+          EXPIRES_AT: ${{ steps.config.outputs.expires_at }}
+          BRANCH: ${{ steps.config.outputs.branch }}
+        run: |
+          set -euo pipefail
+          SUBDOMAIN="$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" \
+            | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{const r=JSON.parse(d);if(!r.success)process.exit(1);console.log(r.result.subdomain)})')"
+          URL="https://$NAME.$SUBDOMAIN.workers.dev"
+          {
+            echo "## Náhled větve \`$BRANCH\`"
+            echo
+            echo "**$URL**"
+            echo
+            echo "- přihlášení: uživatel \`nahled\`, heslo ze secretu \`STAGING_PASSWORD\`"
+            echo "- neindexuje se (X-Robots-Tag: noindex, robots.txt Disallow)"
+            echo "- platí do **$EXPIRES_AT** (pak 410), další push platnost prodlouží"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "Náhled: $URL"

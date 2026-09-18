@@ -11,3 +11,7 @@ Thumbs.db
 # Lokální nastavení nástrojů (.claude/settings.json je naopak verzovaný)
 .claude/settings.local.json
 .claude/worktrees/
+
+# Staging náhledy: wrangler.toml generuje workflow, screenshoty jsou lokální
+staging/wrangler.toml
+screenshots/

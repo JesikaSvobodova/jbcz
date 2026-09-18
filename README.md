@@ -157,3 +157,32 @@ Pro automatický deploy stačí odkomentovat příslušný blok v `.github/workf
 | [Marketingová strategie](docs/marketingova-strategie.md) | Cílové skupiny, obsah, kanály |
 | [Brand a komunikace](docs/brand-a-komunikace.md) | Vizuální identita, komunikační principy |
 | [Technické zadání](docs/technicke-zadani.md) | Architektura, stack, fáze implementace |
+
+---
+
+## Jak se publikují změny
+
+**Závazný postup je v [CLAUDE.md](CLAUDE.md).** Stručně:
+
+1. Změna jde na feature větev `claude/<popis>` — nikdy přímo do `main`.
+2. Push větve nasadí chráněný náhled na Cloudflare Workers
+   (`.github/workflows/staging.yml`). Adresa náhledu se vypíše do souhrnu běhu
+   v GitHub Actions.
+3. Náhled je za basic auth (uživatel `nahled`), neindexuje se a po 5 dnech od
+   posledního pushe vrací `410`. Denní úklid ho pak smaže.
+4. Před předáním se náhled projde screenshoty:
+   `npm run shoot -- <url> --user nahled --pass <heslo>`
+5. Na ostrý web (`www.janbartosek.cz`) se nasazuje jen mergem do `main`, a to
+   až po odsouhlasení náhledu.
+
+### Co je potřeba nastavit jednou
+
+GitHub → Settings → Secrets and variables → Actions:
+
+| Secret | Co to je |
+|--------|----------|
+| `CLOUDFLARE_API_TOKEN` | Token s oprávněním *Edit Cloudflare Workers* |
+| `CLOUDFLARE_ACCOUNT_ID` | ID účtu z přehledu Cloudflare |
+| `STAGING_PASSWORD` | Heslo k náhledům (uživatel je vždy `nahled`) |
+
+Bez nich staging workflow skončí chybou, která přesně řekne, co chybí.

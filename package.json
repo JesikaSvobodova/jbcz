@@ -9,9 +9,13 @@
     "preview": "astro preview",
     "astro": "astro",
     "check:analytics": "node scripts/check-analytics.mjs",
-    "verify": "npm run build && npm run check:analytics"
+    "verify": "npm run build && npm run check:analytics",
+    "shoot": "node scripts/shoot.mjs",
+    "staging:name": "node scripts/staging-name.mjs",
+    "staging:cleanup": "node scripts/staging-cleanup.mjs"
   },
   "devDependencies": {
+    "playwright-core": "^1.49.0",
     "wrangler": "^4.0.0"
   },
   "dependencies": {
